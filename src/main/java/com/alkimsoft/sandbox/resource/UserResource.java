@@ -40,9 +40,9 @@ public class UserResource {
         userDAO.create(user2);
 
         User user3 = new User();
-        user1.setName("Mehmet");
-        user1.setSurname("Bal");
-        user1.setJob("mimar");
+        user3.setName("Mehmet");
+        user3.setSurname("Bal");
+        user3.setJob("mimar");
 
         userDAO.create(user3);
 
@@ -68,8 +68,6 @@ public class UserResource {
         }
     }
 
-
-
     @GET
     @Path("update/{oid}")
     @UnitOfWork
@@ -87,15 +85,17 @@ public class UserResource {
         }
     }
 
+    @GET
+    @Path("read/{oid}")
+    @UnitOfWork
+    public Response readByOid(@PathParam("oid") String oid){
 
+        User user =userDAO.findById(oid);
+        if (user != null){
+            return Response.ok().entity(user).build();
+        }  else {
+            return Response.serverError().entity("Kullanıcı Bulunamadı.").build();
+        }
 
-
-
-
-
-
-
-
-
-
+    }
 }
