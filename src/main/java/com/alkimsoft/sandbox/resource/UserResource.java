@@ -7,6 +7,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Created by arici on 28.06.2016.
@@ -33,9 +34,9 @@ public class UserResource {
         userDAO.create(user1);
 
         User user2 = new User();
-        user1.setName("Ahmet");
-        user1.setSurname("Taşçı");
-        user1.setJob("Pazarcı");
+        user2.setName("Ahmet");
+        user2.setSurname("Taşçı");
+        user2.setJob("Pazarcı");
 
         userDAO.create(user2);
 
@@ -68,8 +69,10 @@ public class UserResource {
         }
     }
 
+
+
     @GET
-    @Path("update/{oid}")
+    @Path("delete/{oid}")
     @UnitOfWork
     public Response delete(@PathParam("oid") String oid) {
         User user1 = userDAO.findById(oid);
@@ -88,14 +91,30 @@ public class UserResource {
     @GET
     @Path("read/{oid}")
     @UnitOfWork
-    public Response readByOid(@PathParam("oid") String oid){
+    public Response readByOid(@PathParam("oid") String oid) {
 
-        User user =userDAO.findById(oid);
-        if (user != null){
+        User user = userDAO.findById(oid);
+        if (user != null) {
             return Response.ok().entity(user).build();
-        }  else {
+        } else {
             return Response.serverError().entity("Kullanıcı Bulunamadı.").build();
         }
+    }
 
+
+
+    @GET
+    @Path("deleteAll")
+    @UnitOfWork
+    public Response deleteAll() {
+
+        List<User> userList = userDAO.findAll(User.class);
+
+        for ( int i=0;i<userList.size();i++){
+
+            User user1 = userList.get(i);
+            user1.setDeletingStatus(true);
+        }
+        return Response.ok().entity(userList).build();
     }
 }
