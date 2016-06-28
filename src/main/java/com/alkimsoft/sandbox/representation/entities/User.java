@@ -9,7 +9,7 @@ import javax.persistence.Entity;
  */
 @Entity
 public class User extends BaseEntity {
-private String name;
+    private String name;
     private String surname;
     private String jop;
 
