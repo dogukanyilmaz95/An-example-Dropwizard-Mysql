@@ -1,4 +1,4 @@
-package com.alkimsoft.sandbox.representation;
+package com.alkimsoft.sandbox.representation.entities;
 
 /**
  * Created by doğukan on 28.06.2016.
