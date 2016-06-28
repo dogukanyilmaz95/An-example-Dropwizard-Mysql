@@ -101,6 +101,12 @@ public class UserResource {
         }
     }
 
+    @GET
+    @Path("read")
+    @UnitOfWork
+    public Response read() {
+            return Response.ok().entity(userDAO.findAll(User.class)).build();
+    }
 
 
     @GET
