@@ -1,5 +1,6 @@
 package com.alkimsoft.sandbox;
 
+import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
 import com.alkimsoft.sandbox.resource.UserResource;
 import io.dropwizard.Application;
@@ -47,7 +48,9 @@ public class App extends Application<ProjectConfiguration> {
         filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
         //  CORS Settings
 
-        environment.jersey().register(new UserResource());
+        final UserDAO userDAO = new UserDAO(hibernateBundle.getSessionFactory());
+
+        environment.jersey().register(new UserResource(userDAO));
 
     }
 
