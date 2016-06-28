@@ -4,10 +4,7 @@ import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
 import io.dropwizard.hibernate.UnitOfWork;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.LinkedList;
@@ -27,26 +24,35 @@ public class UserResource {
     }
 
     @GET
-    @Path("read")
+    @Path("create")
     @UnitOfWork
-    public Response read() {
-//        List<User> userList = new LinkedList<>();
-
+    public Response create() {
         User user1 = new User();
         user1.setName("Ali");
         user1.setSurname("Demir");
         user1.setJob("Muhasebeci");
 
-//        User user2 = new User();
-//        user2.setName("İsmet");
-//        user2.setSurname("Özel");
-//        user2.setJob("Şair");
-//
-//        userList.add(user1);
-//        userList.add(user2);
-
         userDAO.create(user1);
 
         return Response.ok().entity(user1).build();
+    }
+
+    @GET
+    @Path("update/{oid}")
+    @UnitOfWork
+    public Response create(@PathParam("oid") String oid) {
+        User user1 = userDAO.findById(oid);
+
+        if (user1 != null) {
+            user1.setName("Veli");
+            user1.setSurname("Çelik");
+            user1.setJob("Ön Muhasebeci");
+
+            userDAO.update(user1);
+
+            return Response.ok().entity(user1).build();
+        } else {
+            return Response.serverError().entity("Kullanıcı Bulunamadı.").build();
+        }
     }
 }
