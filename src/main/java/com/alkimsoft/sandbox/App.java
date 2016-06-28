@@ -1,6 +1,7 @@
 package com.alkimsoft.sandbox;
 
 import com.alkimsoft.sandbox.representation.entities.User;
+import com.alkimsoft.sandbox.resource.UserResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -30,7 +31,7 @@ public class App extends Application<ProjectConfiguration> {
 
     @Override
     public void initialize(io.dropwizard.setup.Bootstrap<ProjectConfiguration> bootstrap) {
-//        bootstrap.addBundle(hibernateBundle);
+        bootstrap.addBundle(hibernateBundle);
     }
 
     @Override
@@ -45,6 +46,8 @@ public class App extends Application<ProjectConfiguration> {
         filter.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin");
         filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
         //  CORS Settings
+
+        environment.jersey().register(new UserResource());
 
     }
 

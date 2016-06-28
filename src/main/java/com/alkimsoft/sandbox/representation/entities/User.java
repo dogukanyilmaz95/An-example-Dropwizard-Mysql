@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class User extends BaseEntity {
     private String name;
     private String surname;
-    private String jop;
+    private String job;
 
     public String getSurname() {
         return surname;
@@ -29,11 +29,11 @@ public class User extends BaseEntity {
         this.name = name;
     }
 
-    public String getJop() {
-        return jop;
+    public String getJob() {
+        return job;
     }
 
-    public void setJop(String jop) {
-        this.jop = jop;
+    public void setJob(String job) {
+        this.job = job;
     }
 }
