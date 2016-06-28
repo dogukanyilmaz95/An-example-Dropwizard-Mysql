@@ -1,9 +1,14 @@
 package com.alkimsoft.sandbox.representation.entities;
 
+import com.alkimsoft.sandbox.representation.core.BaseEntity;
+
+import javax.persistence.Entity;
+
 /**
  * Created by doğukan on 28.06.2016.
  */
-public class User {
+@Entity
+public class User extends BaseEntity {
 private String name;
     private String surname;
     private String jop;
