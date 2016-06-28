@@ -3,10 +3,13 @@ package com.alkimsoft.sandbox.resource;
 import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
 import io.dropwizard.hibernate.UnitOfWork;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by arici on 28.06.2016.
@@ -33,16 +36,16 @@ public class UserResource {
         userDAO.create(user1);
 
         User user2 = new User();
-        user1.setName("Ahmet");
-        user1.setSurname("Taşçı");
-        user1.setJob("Pazarcı");
+        user2.setName("Ahmet");
+        user2.setSurname("Taşçı");
+        user2.setJob("Pazarcı");
 
         userDAO.create(user2);
 
         User user3 = new User();
-        user1.setName("Mehmet");
-        user1.setSurname("Bal");
-        user1.setJob("mimar");
+        user3.setName("Mehmet");
+        user3.setSurname("Bal");
+        user3.setJob("mimar");
 
         userDAO.create(user3);
 
@@ -68,15 +71,13 @@ public class UserResource {
         }
     }
 
+    @GET
+    @Path("read")
+    @UnitOfWork
+    public Response read(){
 
-
-
-
-
-
-
-
-
+        return Response.ok().entity(userDAO.findAll(User.class)).build();
+    }
 
 
 }
