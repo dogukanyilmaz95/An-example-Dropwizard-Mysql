@@ -1,8 +1,10 @@
 package com.alkimsoft.sandbox;
 
+import com.alkimsoft.sandbox.representation.entities.User;
 import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Environment;
-import io.dropwizard.views.ViewBundle;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +19,18 @@ import java.util.EnumSet;
 public class App extends Application<ProjectConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
+    private final HibernateBundle<ProjectConfiguration> hibernateBundle = new HibernateBundle<ProjectConfiguration>(
+            User.class
+    ) {
+        @Override
+        public DataSourceFactory getDataSourceFactory(ProjectConfiguration projectConfiguration) {
+            return projectConfiguration.getDataSourceFactory();
+        }
+    };
+
     @Override
     public void initialize(io.dropwizard.setup.Bootstrap<ProjectConfiguration> bootstrap) {
-        bootstrap.addBundle(new ViewBundle());
+//        bootstrap.addBundle(hibernateBundle);
     }
 
     @Override
