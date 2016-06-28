@@ -2,6 +2,7 @@ package com.alkimsoft.sandbox;
 
 import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
+import com.alkimsoft.sandbox.resource.UserResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;

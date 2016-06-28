@@ -7,8 +7,6 @@ import io.dropwizard.hibernate.UnitOfWork;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by arici on 28.06.2016.
@@ -34,6 +32,20 @@ public class UserResource {
 
         userDAO.create(user1);
 
+        User user2 = new User();
+        user1.setName("Ahmet");
+        user1.setSurname("Taşçı");
+        user1.setJob("Pazarcı");
+
+        userDAO.create(user2);
+
+        User user3 = new User();
+        user1.setName("Mehmet");
+        user1.setSurname("Bal");
+        user1.setJob("mimar");
+
+        userDAO.create(user3);
+
         return Response.ok().entity(user1).build();
     }
 
@@ -55,4 +67,16 @@ public class UserResource {
             return Response.serverError().entity("Kullanıcı Bulunamadı.").build();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }
