@@ -40,7 +40,7 @@ public class UserResource {
     @GET
     @Path("update/{oid}")
     @UnitOfWork
-    public Response create(@PathParam("oid") String oid) {
+    public Response update(@PathParam("oid") String oid) {
         User user1 = userDAO.findById(oid);
 
         if (user1 != null) {
