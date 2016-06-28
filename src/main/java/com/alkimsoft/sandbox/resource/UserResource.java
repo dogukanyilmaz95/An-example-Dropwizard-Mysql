@@ -79,5 +79,17 @@ public class UserResource {
         return Response.ok().entity(userDAO.findAll(User.class)).build();
     }
 
+    @GET
+    @Path("read/{oid}")
+    @UnitOfWork
+    public Response readByOid(@PathParam("oid") String oid){
 
+        User user =userDAO.findById(oid);
+        if (user != null){
+            return Response.ok().entity(user).build();
+        }  else {
+            return Response.serverError().entity("Kullanıcı Bulunamadı.").build();
+        }
+
+    }
 }
