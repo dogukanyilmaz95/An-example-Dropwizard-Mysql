@@ -58,16 +58,19 @@ public class UserResource {
 
     }
 
-    @GET
+    @POST
     @Path("update/{oid}")
     @UnitOfWork
-    public Response update(@PathParam("oid") String oid) {
+    public Response update(Map<String,String> userdata) {
+
+        String oid=userdata.get("oid");
+
         User user1 = userDAO.findById(oid);
 
         if (user1 != null) {
-            user1.setName("Veli");
-            user1.setSurname("Çelik");
-            user1.setJob("Ön Muhasebeci");
+            user1.setName(userdata.get("name"));
+            user1.setSurname(userdata.get("surname"));
+            user1.setJob(userdata.get("job"));
 
             userDAO.update(user1);
 
@@ -79,10 +82,11 @@ public class UserResource {
 
 
 
-    @GET
+    @POST
     @Path("delete/{oid}")
     @UnitOfWork
-    public Response delete(@PathParam("oid") String oid) {
+    public Response delete(Map<String,String> userdata) {
+        String oid=userdata.get("oid");
         User user1 = userDAO.findById(oid);
 
         if (user1 != null) {
