@@ -99,7 +99,7 @@ public class UserResource {
             return Response.serverError().entity("Kullanıcı Bulunamadı.").build();
         }
     }
-
+//p
     @GET
     @Path("read/{oid}")
     @UnitOfWork
