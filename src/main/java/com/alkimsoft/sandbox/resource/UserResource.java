@@ -24,7 +24,7 @@ public class UserResource {
         this.userDAO = userDAO;
     }
 
-    @GET
+    @POST
     @Path("create")
     @UnitOfWork
     public Response create(Map<String,String> userdata)
