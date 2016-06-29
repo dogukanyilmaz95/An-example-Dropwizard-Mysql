@@ -8,6 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by arici on 28.06.2016.
@@ -18,6 +19,7 @@ import java.util.List;
 public class UserResource {
     UserDAO userDAO;
 
+
     public UserResource(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
@@ -25,14 +27,19 @@ public class UserResource {
     @GET
     @Path("create")
     @UnitOfWork
-    public Response create() {
-        User user1 = new User();
-        user1.setName("Ali");
-        user1.setSurname("Demir");
-        user1.setJob("Muhasebeci");
+    public Response create(Map<String,String> userdata)
+    {
+        String username = userdata.get("name");
+        String surname = userdata.get("surname");
+        String job = userdata.get("job");
 
-        userDAO.create(user1);
+         User user = new User();
+        user.setName(username);
+        user.setSurname(surname);
+        user.setJob(job);
 
+        userDAO.create(user);
+/*
         User user2 = new User();
         user2.setName("Ahmet");
         user2.setSurname("Taşçı");
@@ -46,8 +53,9 @@ public class UserResource {
         user3.setJob("mimar");
 
         userDAO.create(user3);
+*/
+        return Response.ok().entity(user).build();
 
-        return Response.ok().entity(user1).build();
     }
 
     @GET
