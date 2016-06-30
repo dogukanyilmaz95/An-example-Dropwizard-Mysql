@@ -31,19 +31,18 @@ public class AuthResource {
     public Response login(Map<String,String> userdata){
         String email=userdata.get("email");
         String password=userdata.get("password");
-
+        return Response.ok(userDAO.loginControl(password,email)).build();
     }
 
-
+/*
     @POST
     @Path("logout")
     @UnitOfWork
-    public Response login(Map<String,String> userdata){
-        String email=userdata.get("email");
-        String password=userdata.get("password");
+    public Response logout(Map<String,String> userdata){
+        String password=userdata.get("usertoken");
 
     }
-
+*/
 
 
 }
