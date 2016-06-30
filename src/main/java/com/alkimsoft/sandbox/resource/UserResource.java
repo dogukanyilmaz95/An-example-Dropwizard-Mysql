@@ -91,7 +91,6 @@ public class UserResource {
 
         if (user1 != null) {
           user1.setDeletingStatus(true);
-
             userDAO.update(user1);
 
             return Response.ok().entity(user1).build();
@@ -117,7 +116,7 @@ public class UserResource {
     @Path("read")
     @UnitOfWork
     public Response read() {
-            return Response.ok().entity(userDAO.findAll(User.class)).build();
+            return Response.ok().entity(userDAO.getAll()).build();
     }
 
 

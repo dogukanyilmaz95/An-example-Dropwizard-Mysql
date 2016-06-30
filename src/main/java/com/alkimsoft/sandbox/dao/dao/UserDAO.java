@@ -2,7 +2,11 @@ package com.alkimsoft.sandbox.dao.dao;
 
 import com.alkimsoft.sandbox.dao.core.BaseDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.List;
 
 /**
  * Created by gunerkaanalkim on 28/06/16.
@@ -10,5 +14,11 @@ import org.hibernate.SessionFactory;
 public class UserDAO extends BaseDAO<User> {
     public UserDAO(SessionFactory sessionFactory) {
         super(sessionFactory);
+    }
+
+    public List<User> getAll() {
+        Criteria criteria = currentSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("deletingStatus",false));
+        return list(criteria);
     }
 }

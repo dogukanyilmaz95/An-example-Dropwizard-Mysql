@@ -3,6 +3,8 @@ package com.alkimsoft.sandbox.dao.core;
 import com.alkimsoft.sandbox.representation.core.BaseEntity;
 import com.alkimsoft.sandbox.representation.entities.User;
 import io.dropwizard.hibernate.AbstractDAO;
+import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
+import org.apache.xmlbeans.impl.xb.xsdschema.RestrictionDocument;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 
@@ -18,7 +20,9 @@ public class BaseDAO<T extends BaseEntity> extends AbstractDAO<T> {
     }
 
     public List<T> findAll(Class<T> t) {
+
         Criteria criteria = currentSession().createCriteria(t);
+
         return list(criteria);
     }
 
