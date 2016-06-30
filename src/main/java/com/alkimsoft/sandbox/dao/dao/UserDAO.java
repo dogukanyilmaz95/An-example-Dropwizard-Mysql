@@ -21,10 +21,10 @@ public class UserDAO extends BaseDAO<User> {
         criteria.add(Restrictions.eq("deletingStatus",false));
         return list(criteria);
     }
-    public List<User> loginControl(String pass,String email) {
+    public User loginControl(String pass,String email) {
         Criteria criteria = currentSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("password",pass));
         criteria.add(Restrictions.eq("email",email));
-        return list(criteria);
+        return uniqueResult(criteria);
     }
 }

@@ -1,6 +1,8 @@
 package com.alkimsoft.sandbox.resource;
 
+import com.alkimsoft.sandbox.auth.TokenGenaretor;
 import com.alkimsoft.sandbox.dao.dao.UserDAO;
+import com.alkimsoft.sandbox.representation.entities.User;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.Consumes;
@@ -31,7 +33,14 @@ public class AuthResource {
     public Response login(Map<String,String> userdata){
         String email=userdata.get("email");
         String password=userdata.get("password");
-        return Response.ok(userDAO.loginControl(password,email)).build();
+
+        User user = userDAO.loginControl(password,email);
+
+        if(user != null) {
+            return Response.ok(TokenGenaretor.generate()).build();
+        } else {
+            return Response.ok("kullanıcı bulunamadı").build();
+        }
     }
 
 /*

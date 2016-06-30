@@ -2,6 +2,7 @@ package com.alkimsoft.sandbox;
 
 import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
+import com.alkimsoft.sandbox.resource.AuthResource;
 import com.alkimsoft.sandbox.resource.UserResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -51,7 +52,7 @@ public class App extends Application<ProjectConfiguration> {
         final UserDAO userDAO = new UserDAO(hibernateBundle.getSessionFactory());
 
         environment.jersey().register(new UserResource(userDAO));
-
+        environment.jersey().register(new AuthResource(userDAO));
     }
 
     public static void main(String[] args) throws Exception {
