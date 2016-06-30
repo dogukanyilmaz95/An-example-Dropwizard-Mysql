@@ -32,28 +32,17 @@ public class UserResource {
         String username = userdata.get("name");
         String surname = userdata.get("surname");
         String job = userdata.get("job");
+        String email=userdata.get("email");
+        String password=userdata.get("password");
 
          User user = new User();
         user.setName(username);
         user.setSurname(surname);
         user.setJob(job);
-
+        user.setEmail(email);
+        user.setPassword(password);
         userDAO.create(user);
-/*
-        User user2 = new User();
-        user2.setName("Ahmet");
-        user2.setSurname("Taşçı");
-        user2.setJob("Pazarcı");
 
-        userDAO.create(user2);
-
-        User user3 = new User();
-        user3.setName("Mehmet");
-        user3.setSurname("Bal");
-        user3.setJob("mimar");
-
-        userDAO.create(user3);
-*/
         return Response.ok().entity(user).build();
 
     }
