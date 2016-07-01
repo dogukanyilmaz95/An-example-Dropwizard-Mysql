@@ -1,6 +1,6 @@
 package com.alkimsoft.sandbox;
 
-import com.alkimsoft.sandbox.dao.dao.TokenDAO;
+import com.alkimsoft.sandbox.dao.dao.UserTokenDAO;
 import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
 import com.alkimsoft.sandbox.representation.entities.UserToken;
@@ -53,7 +53,7 @@ public class App extends Application<ProjectConfiguration> {
         //  CORS Settings
 
         final UserDAO userDAO = new UserDAO(hibernateBundle.getSessionFactory());
-        final TokenDAO tokenDAO = new TokenDAO(hibernateBundle.getSessionFactory());
+        final UserTokenDAO tokenDAO = new UserTokenDAO(hibernateBundle.getSessionFactory());
 
         environment.jersey().register(new UserResource(userDAO));
         environment.jersey().register(new AuthResource(userDAO,tokenDAO));

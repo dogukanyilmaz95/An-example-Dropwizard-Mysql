@@ -7,8 +7,8 @@ import org.hibernate.SessionFactory;
 /**
  * Created by doğukan on 1.07.2016.
  */
-public class TokenDAO extends BaseDAO<UserToken> {
-    public TokenDAO(SessionFactory sessionFactory){
+public class UserTokenDAO extends BaseDAO<UserToken> {
+    public UserTokenDAO(SessionFactory sessionFactory){
         super(sessionFactory);
     }
 

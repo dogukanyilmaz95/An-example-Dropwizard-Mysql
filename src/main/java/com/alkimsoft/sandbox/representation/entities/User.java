@@ -1,6 +1,7 @@
 package com.alkimsoft.sandbox.representation.entities;
 
 import com.alkimsoft.sandbox.representation.core.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 
@@ -13,6 +14,7 @@ public class User extends BaseEntity {
     private String surname;
     private String job;
     private String email;
+    @JsonIgnore
     private String password;
 
     public String getEmail() {
