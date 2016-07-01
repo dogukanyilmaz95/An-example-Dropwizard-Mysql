@@ -44,7 +44,9 @@ public class AuthResource {
 
         if(user != null) {
             String tokenA = TokenGenaretor.generate().toString();
-            UserToken userToken = new UserToken(tokenA,user);
+            UserToken userToken = new UserToken();
+            userToken.setToken(tokenA);
+            userToken.setUser(user);
             return Response.ok(userToken.getToken()).build();
         } else {
             return Response.ok("kullanıcı bulunamadı").build();

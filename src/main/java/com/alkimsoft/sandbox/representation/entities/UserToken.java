@@ -16,12 +16,6 @@ public class UserToken extends BaseEntity {
     private User user;
     private String token;
 
-    public UserToken(String token,User user){
-        this.user=user;
-        this.token=token;
-
-    }
-
     public User getUser() {
         return user;
     }
