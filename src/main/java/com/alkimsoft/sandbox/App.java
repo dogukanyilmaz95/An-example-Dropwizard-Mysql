@@ -1,7 +1,9 @@
 package com.alkimsoft.sandbox;
 
+import com.alkimsoft.sandbox.dao.dao.TokenDAO;
 import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.User;
+import com.alkimsoft.sandbox.representation.entities.UserToken;
 import com.alkimsoft.sandbox.resource.AuthResource;
 import com.alkimsoft.sandbox.resource.UserResource;
 import io.dropwizard.Application;
@@ -23,7 +25,8 @@ public class App extends Application<ProjectConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
     private final HibernateBundle<ProjectConfiguration> hibernateBundle = new HibernateBundle<ProjectConfiguration>(
-            User.class
+            User.class,
+            UserToken.class
     ) {
         @Override
         public DataSourceFactory getDataSourceFactory(ProjectConfiguration projectConfiguration) {
@@ -50,9 +53,10 @@ public class App extends Application<ProjectConfiguration> {
         //  CORS Settings
 
         final UserDAO userDAO = new UserDAO(hibernateBundle.getSessionFactory());
+        final TokenDAO tokenDAO = new TokenDAO(hibernateBundle.getSessionFactory());
 
         environment.jersey().register(new UserResource(userDAO));
-        environment.jersey().register(new AuthResource(userDAO));
+        environment.jersey().register(new AuthResource(userDAO,tokenDAO));
     }
 
     public static void main(String[] args) throws Exception {

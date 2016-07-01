@@ -1,6 +1,7 @@
 package com.alkimsoft.sandbox.resource;
 
 import com.alkimsoft.sandbox.auth.TokenGenaretor;
+import com.alkimsoft.sandbox.dao.dao.TokenDAO;
 import com.alkimsoft.sandbox.dao.dao.UserDAO;
 import com.alkimsoft.sandbox.representation.entities.UserToken;
 import com.alkimsoft.sandbox.representation.entities.User;
@@ -23,10 +24,10 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthResource {
     UserDAO userDAO;
-    TokenGenaretor tokenGenaretor;
-    UserToken userToken;
+    TokenDAO tokenDAO;
 
-    public AuthResource(UserDAO userDAO) {
+    public AuthResource(UserDAO userDAO,TokenDAO tokenDAO) {
+        this.tokenDAO = tokenDAO;
         this.userDAO = userDAO;
     }
 
@@ -40,11 +41,11 @@ public class AuthResource {
 
         User user = userDAO.loginControl(password,email);
 
+
         if(user != null) {
-            String tokenA =tokenGenaretor.generate().toString();
-            userToken.setToken(tokenA);
-            userToken.setUser(user);
-            return Response.ok(tokenA).build();
+            String tokenA = TokenGenaretor.generate().toString();
+            UserToken userToken = new UserToken(tokenA,user);
+            return Response.ok(userToken.getToken()).build();
         } else {
             return Response.ok("kullanıcı bulunamadı").build();
         }
